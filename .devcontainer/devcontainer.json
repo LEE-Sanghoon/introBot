@@ -1,0 +1,8 @@
+{
+  "name": "My Custom Dockerfile Env",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "uname -a"
+}
+
