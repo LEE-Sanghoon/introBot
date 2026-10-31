@@ -1,8 +1,35 @@
 {
-  "name": "My Custom Dockerfile Env",
+  "name": "ROS 2 Jazzy + MuJoCo Environment",
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "uname -a"
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ros/Workspaces,type=bind,consistency=cached",
+  "workspaceFolder": "/home/ros/Workspaces",
+  "remoteUser": "ros",
+  "runArgs": [
+    "--net=host",
+    "--ipc=host",
+    //"--device=/dev/dri" # GPU acceleration for MuJoCo (uncomment if you have a compatible GPU)
+  ],
+  "containerEnv": {
+    //"DISPLAY": "${localEnv:DISPLAY}",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "QT_X11_NO_MITSHM": "1"
+  },
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Ranch-Hand-Robotics.rde-pack",
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        //"ms-azuretools.vscode-docker",
+        "twxs.cmake",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "postCreateCommand": "cd /home/ros/Workspaces"
 }
-
